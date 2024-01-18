@@ -65,6 +65,8 @@ Purpose |Endpoints |Method |Sample
 
 |Read All news |'news/' | **GET** | http://127.0.0.1:5000/news/ 
 
+|Search Sentiment Based news |'news/search/' | **POST** | http://127.0.0.1:5000/news/search/ 
+
 |Single Article details  |'news/<int:news_id>/' | **GET** | http://127.0.0.1:5000/news/8/ 
 
 |=========================================================
@@ -76,20 +78,24 @@ Purpose |Endpoints |Method |Sample
 
 |Read All news |'api/news/' | **GET** | http://127.0.0.1:5000/api/news/ 
 
-|Read Sentiment Based news (Data in body) |'api/news/' | **POST** | http://127.0.0.1:5000/api/news/
+|Read Sentiment Based news (Data in body) |'api/news/search/' | **POST** | http://127.0.0.1:5000/api/news/search/
 
 |Read Specific news  |'news/<int:news_id>/' | **GET** | http://127.0.0.1:5000/api/news/8/
 
 |=========================================================
 
 === Body for 'api/news/'
+----
 JSON:
 {
+
     "start_date":"2023-10-21",
+    
     "end_date":"2024-1-24",
+    
     "type":"Pos"
 }
-
+----
 
 == Features 
 **The Backend** contain all essential features:
