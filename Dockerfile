@@ -4,10 +4,10 @@ EXPOSE 5000
 # Set the working directory
 WORKDIR /app
 # Copy requirements.txt and install dependencies
-COPY requirements.txt .
+COPY . .
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
-# Copy the application code
-COPY . .
-# Run the population script before starting the Flask application
-CMD ["sh", "-c", "python populate.py && flask run --host 0.0.0.0"]
+# Set the entrypoint script as executable
+RUN chmod +x entrypoint.sh
+# Specify the entrypoint script
+ENTRYPOINT ["/app/entrypoint.sh"]

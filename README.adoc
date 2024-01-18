@@ -1,0 +1,102 @@
+# News-Vibe
+News Sentiment Analyser
+
+= The News-Vibe: 
+:toc:
+:toc-placement!:
+
+
+**News Vibe** is an innovative system designed to revolutionize the way **news articles** are *analyzed* and *presented*. Serving as a **robust backend** for a variety of applications, **News Vibe** excels in retrieving news articles on a given topic, conducting sentiment analysis, and delivering insightful results through a dedicated API. Developed with cutting-edge natural language processing algorithms, this system seamlessly evaluates the emotional tone of news articles, providing valuable insights into public sentiment.
+
+== Website 
+
+[discrete]
+# INDEX
+
+toc::[]
+
+== Technologies Used
+
+- **Flask Framework**: A powerful and flexible toolkit for building Web APIs using Flask.
+- **Python**: The programming language used for the backend development.
+- **MySQL**: A robust and scalable relational database for storing blog posts, user information, and related data. 
+- **Docker**: Docker provides the ability to package and run an application in a loosely isolated environment called a container. 
+- **VADER sentiment**: *Valence Aware Dictionary for sEntiment Reasoning* (VADER) is a popular rule-based sentiment analyzer. It uses a list of lexical features (e.g. word) which are labeled as positive or negative according to their semantic orientation to calculate the text sentiment.
+
+Vader is optimized for social media data and can yield good results when used with data from twitter, facebook, etc.
+
+The main drawback with the rule-based approach for sentiment analysis is that the method only cares about individual words and completely ignores the context in which it is used. 
+
+
+== Getting Started
+
+To start using The News Vibe, follow the steps below:
+
+- Clone the repository:
+----
+ git clone https://github.com/Pranav-Tiwari-Epi/News-Vibe.git
+----
+- Install the docker and docker-compose:
+----
+Official website: https://www.docker.com/products/docker-desktop/
+----
+Naviagte to the folder containing docker-compose.yml file
+Run following commands to build docker-image and run docker-container.
+
+- Build docker-image
+----
+ docker-compose build
+----
+- Run docker-components:
+----
+docker-compose up
+----
+
+== Endpoints
+
+
+=== HTML endpoints
+
+|=========================================================
+Purpose |Endpoints |Method |Sample
+
+|Read All news |'news/' | **GET** | http://127.0.0.1:5000/news/ 
+
+|Search Sentiment Based news |'news/search/' | **POST** | http://127.0.0.1:5000/news/search/ 
+
+|Single Article details  |'news/<int:news_id>/' | **GET** | http://127.0.0.1:5000/news/8/ 
+
+|=========================================================
+
+=== JSON endpoints
+
+|=========================================================
+Purpose |Endpoints |Method |Sample
+
+|Read All news |'api/news/' | **GET** | http://127.0.0.1:5000/api/news/ 
+
+|Read Sentiment Based news (Data in body) |'api/news/search/' | **POST** | http://127.0.0.1:5000/api/news/search/
+
+|Read Specific news  |'news/<int:news_id>/' | **GET** | http://127.0.0.1:5000/api/news/8/
+
+|=========================================================
+
+=== Body for 'api/news/'
+----
+JSON:
+{
+
+    "start_date":"2023-10-21",
+    
+    "end_date":"2024-1-24",
+    
+    "type":"Pos"
+}
+----
+
+== Features 
+**The Backend** contain all essential features:
+
+
+
+
