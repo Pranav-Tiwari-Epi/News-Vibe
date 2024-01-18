@@ -72,7 +72,7 @@ Purpose |Endpoints |Method |Sample
 === JSON endpoints
 
 |=========================================================
-Purpose |Endpoints |Method |Sample| Authentication
+Purpose |Endpoints |Method |Sample
 
 |Read All news |'api/news/' | **GET** | http://127.0.0.1:5000/api/news/ 
 
