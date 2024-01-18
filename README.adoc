@@ -6,9 +6,6 @@ News Sentiment Analyser
 :toc-placement!:
 
 
-<!-- image: [TAP Logo,title="TAP Logo"] -->
-
-
 **News Vibe** is an innovative system designed to revolutionize the way **news articles** are *analyzed* and *presented*. Serving as a **robust backend** for a variety of applications, **News Vibe** excels in retrieving news articles on a given topic, conducting sentiment analysis, and delivering insightful results through a dedicated API. Developed with cutting-edge natural language processing algorithms, this system seamlessly evaluates the emotional tone of news articles, providing valuable insights into public sentiment.
 
 == Website 
@@ -23,7 +20,7 @@ toc::[]
 - **Flask Framework**: A powerful and flexible toolkit for building Web APIs using Flask.
 - **Python**: The programming language used for the backend development.
 - **MySQL**: A robust and scalable relational database for storing blog posts, user information, and related data. 
-- **Docker**: 
+- **Docker**: Docker provides the ability to package and run an application in a loosely isolated environment called a container. 
 - **VADER sentiment**: *Valence Aware Dictionary for sEntiment Reasoning* (VADER) is a popular rule-based sentiment analyzer. It uses a list of lexical features (e.g. word) which are labeled as positive or negative according to their semantic orientation to calculate the text sentiment.
 
 Vader is optimized for social media data and can yield good results when used with data from twitter, facebook, etc.
