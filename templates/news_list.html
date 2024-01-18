@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Vibes</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        h1, h2 {
+            color: #007bff;
+        }
+
+        
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        li {
+            margin-bottom: 10px;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        li:hover {
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>News Articles</h1>
+    {% if error %}
+        <div class="error-container">
+            <p>Error: {{ error }}</p>
+        </div>
+    {% endif %}
+    <ul>
+        {% for item in items %}
+        <a href="{{ item.url }}">
+            <li>{{ item.title }} - <em>{{ item.source }}</em></li>
+        </a>
+        {% endfor %}
+    </ul>
+
+    <script>
+        function validateForm() {
+            var startDate = document.getElementById('start_date').value;
+            var endDate = document.getElementById('end_date').value;
+
+            if (startDate === "" || endDate === "") {
+                alert("Please select both start and end dates.");
+                return false;
+            } else if (startDate > endDate) {
+                alert("End date should be equal to or later than the start date.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+
+</html>
