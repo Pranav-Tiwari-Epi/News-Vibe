@@ -15,16 +15,14 @@ api_bp = Blueprint("api", __name__, url_prefix="/api")
 @frontend_bp.route("/news", methods=["GET", "POST"])
 @frontend_bp.route("/news/", methods=["GET", "POST"])
 class FrontendNews(MethodView):
-    @frontend_bp.doc(description="Endpoint to retrieve all data from the database with a GET request.")
     def get(self):
         try:
             items = NewsModel.query.all()
             return render_template('index.html', items=items)
         except SQLAlchemyError as e:
             db.session.rollback()
-            return abort(500, message=f"Database error: {str(e)}")
-    
-    @frontend_bp.doc(description="Endpoint to retrieve specific data from the database with a POST request based on request data.")
+            error_message = f"Database error: {str(e)}"
+            return render_template('index.html', error=error_message)
     def post(self):
         try:
             start_date = request.form.get('start_date')
@@ -32,7 +30,7 @@ class FrontendNews(MethodView):
             sentiment = request.form.get('type')
 
             if start_date > end_date:
-                return abort(400, message="Start date cannot be greater than end date")
+                return render_template('index.html', error="Start date cannot be greater than end date")
 
             if sentiment is None:
                 items = NewsModel.query.filter(NewsModel.date.between(start_date, end_date)).all()
@@ -42,23 +40,20 @@ class FrontendNews(MethodView):
                     NewsModel.sentimentAnalysis.like(sentiment)
                 ).all()
             return render_template('index.html', items=items)
-        
         except SQLAlchemyError as e:
             db.session.rollback()
-            return abort(500, message=f"Database error: {str(e)}")
-        
+            error_message = f"Database error: {str(e)}"
+            return render_template('index.html', error=error_message)        
 
 @frontend_bp.route("/news/<int:news_id>")
 @frontend_bp.route("/news/<int:news_id>/")
-class NewsItem(MethodView):
-
-    @api_bp.response(200, NewsResponseSchema)
+class FrontendNewsItem(MethodView):
     def get(self, news_id):
         try:
             item = NewsModel.query.get_or_404(str(news_id))
-            return item
+            return render_template('news_item.html', item=item)
         except SQLAlchemyError as e:
-            return abort(500, message=f"Database error: {str(e)}")
+            return render_template('news_item.html', error=f"Database error: {str(e)}")
 
         
 @api_bp.route("/news")
@@ -100,7 +95,7 @@ class ApiNews(MethodView):
 
 @api_bp.route("/news/<int:news_id>")
 @api_bp.route("/news/<int:news_id>/")
-class NewsApiItem(MethodView):
+class ApiNewsItem(MethodView):
 
     @api_bp.response(200, NewsResponseSchema)
     def get(self, news_id):

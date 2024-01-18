@@ -24,13 +24,18 @@ if req.status_code == 200:
     df = response_df.copy(deep=True)
 
     # Data preprocessing steps
+
+    ## Process source column
     df['source'] = df['source'].apply(lambda x: x['name'])
+    ## Drop urlToImage data
     df = df.drop(['urlToImage'], axis=1)
+    ## Segregate date and time from publishedAt
     df['date'] = pd.to_datetime(df['publishedAt']).dt.date
     df['time'] = pd.to_datetime(df['publishedAt']).dt.time
     df = df.drop('publishedAt', axis=1)
     df = df.dropna()
     
+    ## Considering first two lines of text for analysis uptil 200 characters
     def analysis_text(text):
         first2line = text.split('.')[0:2]
         first2line = ''.join(first2line)
@@ -39,8 +44,10 @@ if req.status_code == 200:
         return first2line
     
     df['Analysis Content'] = df['description'].apply(analysis_text)
+    ## Drop content and desription column
     df = df.drop(['content', 'description'], axis=1)
-
+    
+    ## Applying a filter to remove content like 'post deleted' or 'content deleted' or similar 
     def apply_filter(content):
         if 'deleted' in content and ('content' in content or 'post' in content):
             print(content)
@@ -54,16 +61,21 @@ if req.status_code == 200:
     analyzer = SentimentIntensityAnalyzer()
 
     def sentiment_analysis(text):
+        '''
+        (-1 to -0.25) Negative sentiment
+        (-0.25 to 0.25) Neutral sentiment
+        (0.25 to 1) Positive sentiment
+        '''
         comp_score = analyzer.polarity_scores(text)['compound']
         if comp_score >= .25:
             return 'Pos'
-        elif comp_score >= -.25:
+        elif comp_score >= -.25: # Neutral cannot be exactly 0 we need to take some range 
             return 'Neutral'
         else:
             return 'Neg'
     
     df['Sentiment Analysis'] = df['Analysis Content'].apply(lambda x: sentiment_analysis(x))
-    # # Connect to MySQL database
+    ## Connect to MySQL database
     try:
         # Define MySQL connection parameters for SQLAlchemy
         hostname = os.getenv('DB_HOST', 'localhost')

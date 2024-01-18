@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News Search</title>
+    <title>News Vibe</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -131,6 +131,11 @@
             <button type="submit">Search</button>
         </div>
     </form>
+    {% if error %}
+        <div class="error-container">
+            <p>Error: {{ error }}</p>
+        </div>
+    {% endif %}
     <h2>Search Results</h2>
     <ul>
         {% for item in items %}

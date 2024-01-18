@@ -1,0 +1,64 @@
+<!-- templates/news_item.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ item.title }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .news-details {
+            margin-top: 20px;
+        }
+
+        .news-metadata {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .news-content {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .sentiment-analysis {
+            margin-top: 20px;
+        }
+
+        .error-container {
+            margin-top: 20px;
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ item.title }}</h1>
+
+    {% if error %}
+        <div class="error-container">
+            <p>Error: {{ error }}</p>
+        </div>
+    {% else %}
+        <div class="news-details">
+            <p class="news-metadata">Source: {{ item.source }} | Author: {{ item.author }} | Published: {{ item.date }} {{ item.time }}</p>
+            
+            <p class="news-content">{{ item.analysisContent }}</p>
+            <!-- You can uncomment the line above if 'analysisContent' is present in your data -->
+
+            <div class="sentiment-analysis">
+                <strong>Sentiment Analysis:</strong> {{ item.sentimentAnalysis }}
+            </div>
+        </div>
+    {% endif %}
+</body>
+</html>
