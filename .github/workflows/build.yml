@@ -33,4 +33,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: emperorkautilya/news-api:latest
+          tags: |
+            emperorkautilya/news-api:latest
+            emperorkautilya/news-mysql:latest
