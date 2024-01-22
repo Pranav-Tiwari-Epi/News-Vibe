@@ -36,3 +36,4 @@ jobs:
           tags: |
             emperorkautilya/news-api:latest
             emperorkautilya/news-mysql:latest
+            
