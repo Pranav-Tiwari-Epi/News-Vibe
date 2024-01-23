@@ -34,4 +34,4 @@ jobs:
           context: .
           push: true
           tags: |
-            emperorkautilya/news-api:latest
+            emperorkautilya/news-vibes:latest
