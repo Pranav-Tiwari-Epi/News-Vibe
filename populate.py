@@ -9,9 +9,15 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from sqlalchemy import create_engine
 import mysql.connector
 import os
+import sys
 
 # Fetch data from the API
-url = 'https://newsapi.org/v2/everything?q=+India+Maldives&searchIn=title&language=en&apiKey=f04ce8be72f0475093faa83c0b60ea39'
+if len(sys.argv) >= 3 and sys.argv[1] == "--topic":
+    topic = sys.argv[2]
+    topic_encoded = '+'.join(topic.split())
+    url = f'https://newsapi.org/v2/everything?q={topic_encoded}&searchIn=title&language=en&apiKey=f04ce8be72f0475093faa83c0b60ea39'
+else: 
+    url = f'https://newsapi.org/v2/top-headlines?language=en&apiKey=f04ce8be72f0475093faa83c0b60ea39'
 headers = {'Accept': 'application/json'}
 req = requests.get(url, headers=headers)
 

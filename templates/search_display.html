@@ -13,7 +13,8 @@
             color: #333;
         }
 
-        h1, h2 {
+        h1,
+        h2 {
             color: #007bff;
         }
 
@@ -29,12 +30,18 @@
             gap: 15px;
             transition: transform 0.3s ease;
         }
+
         .upper {
             flex-direction: row;
         }
-        .upper div{
+
+        .upper div {
             display: inline-block;
-            width: calc(50% - 10px); 
+            width: calc(50% - 10px);
+        }
+
+        .lower {
+            width: calc(100% - 10px);
         }
 
         form:hover {
@@ -47,7 +54,8 @@
             font-weight: bold;
         }
 
-        input, select {
+        input,
+        select {
             padding: 8px;
             width: calc(100% - 10px);
             margin-bottom: 10px;
@@ -55,28 +63,30 @@
             transition: box-shadow 0.3s ease;
         }
 
-        input:focus, select:focus {
+        input:focus,
+        select:focus {
             box-shadow: 0 0 5px #007bff;
         }
 
         button {
-            padding: 8px; 
-            font-size: 14px; 
+            padding: 8px;
+            font-size: 14px;
             background-color: #007bff;
             color: #fff;
             border: none;
             cursor: pointer;
             border-radius: 5px;
             transition: background-color 0.3s ease, transform 0.3s ease;
-            width: calc(100% - 10px);
+            width: calc(90% - 10px);
+            align-content: center;
         }
-        
+
         button:hover {
             background-color: #0056b3;
             transform: scale(1.05);
         }
-        
-        .btn-div{
+
+        .btn-div {
             align-self: center;
             width: calc(80% - 10px);
         }
@@ -103,6 +113,25 @@
         li:hover {
             transform: scale(1.02);
         }
+
+        /* Media Queries */
+        @media screen and (min-width: 768px) {
+            .btn-div {
+                width: calc(35% - 10px);
+            }
+        }
+
+        @media screen and (min-width: 992px) {
+            .btn-div {
+                width: calc(33.33% - 10px);
+            }
+        }
+
+        @media screen and (min-width: 1200px) {
+            .btn-div {
+                width: calc(20% - 10px);
+            }
+        }
     </style>
 </head>
 
@@ -120,6 +149,10 @@
             </div>
         </div>
         <div class="lower">
+            <label for="topic">Topic:</label>
+            <input type="text" name="topic" id="topic" placeholder="Enter topic" required>
+        </div>
+        <div class="lower">
             <label for="type">Sentiment Type:</label>
             <select name="type" id="type">
                 <option value="Neg">Negative</option>
@@ -132,9 +165,9 @@
         </div>
     </form>
     {% if error %}
-        <div class="error-container">
-            <p>Error: {{ error }}</p>
-        </div>
+    <div class="error-container">
+        <p>Error: {{ error }}</p>
+    </div>
     {% endif %}
     {% if items %}
     <h2>Search Results</h2>
