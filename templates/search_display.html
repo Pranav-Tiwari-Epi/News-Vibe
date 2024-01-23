@@ -40,6 +40,10 @@
             width: calc(50% - 10px);
         }
 
+        .lower {
+            width: calc(100% - 10px);
+        }
+
         form:hover {
             transform: scale(1.02);
         }
@@ -143,6 +147,10 @@
                 <label for="end_date">End Date:</label>
                 <input type="date" name="end_date" id="end_date" required>
             </div>
+        </div>
+        <div class="lower">
+            <label for="topic">Topic:</label>
+            <input type="text" name="topic" id="topic" placeholder="Enter topic" required>
         </div>
         <div class="lower">
             <label for="type">Sentiment Type:</label>

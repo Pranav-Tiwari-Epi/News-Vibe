@@ -5,6 +5,7 @@ from flask_smorest import Blueprint
 from models import NewsModel, db
 from sqlalchemy.exc import SQLAlchemyError
 from logger import configure_logger  # Import logger configuration
+import subprocess
 
 logger = configure_logger()
 frontend_bp = Blueprint("frontend", __name__, template_folder="templates")
@@ -22,6 +23,11 @@ class FrontendNewsSearch(MethodView):
 
     def post(self):
         try:
+            topic = request.form.get('topic') 
+
+            
+            subprocess.run(["python", "populate.py", "--topic", topic])
+
             start_date = request.form.get('start_date')
             end_date = request.form.get('end_date')
             sentiment = request.form.get('type')
@@ -36,13 +42,14 @@ class FrontendNewsSearch(MethodView):
                     NewsModel.date.between(start_date, end_date),
                     NewsModel.sentimentAnalysis.like(sentiment)
                 ).all()
+
             return render_template('search_display.html', items=items)
         except SQLAlchemyError as e:
             db.session.rollback()
             error_message = f"Database error: {str(e)}"
             logger.error(f"Database error: {str(e)}")  # Use the logger for error logging
             return render_template('search_display.html', error=error_message)
-
+        
 @frontend_bp.route("/news", methods=["GET"])
 @frontend_bp.route("/news/", methods=["GET"])
 class FrontendNewsAll(MethodView):
