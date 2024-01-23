@@ -6,7 +6,7 @@ from models import NewsModel
 from models import db
 from sqlalchemy.exc import SQLAlchemyError
 from logger import configure_logger  # Import logger configuration
-
+import subprocess
 # Use the logger configuration
 logger = configure_logger()
 
@@ -20,6 +20,8 @@ class ApiNewsSeach(MethodView):
     @api_bp.arguments(NewsRequestSchema)
     def post(self, search_data):
         try:
+            topic = search_data['topic']
+            subprocess.run(["python", "populate.py", "--topic", topic])
             start_date = search_data['start_date']
             end_date = search_data['end_date']
             
@@ -48,6 +50,7 @@ class ApiNewsAll(MethodView):
     @api_bp.response(200, NewsResponseSchema(many=True))
     def get(self):
         try:
+            subprocess.run(["python", "populate.py"])
             items = NewsModel.query.all()
             return items
         except SQLAlchemyError as e:
