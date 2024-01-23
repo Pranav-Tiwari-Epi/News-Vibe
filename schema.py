@@ -5,6 +5,7 @@ class NewsRequestSchema(Schema):
     start_date=fields.Date(required=True)
     end_date=fields.Date(required=True)
     type=fields.Str()
+    topic=fields.Str()
     
 class NewsResponseSchema(Schema):
     index=fields.Int()
