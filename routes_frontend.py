@@ -55,6 +55,7 @@ class FrontendNewsSearch(MethodView):
 class FrontendNewsAll(MethodView):
     def get(self):
         try:
+            subprocess.run(["python", "populate.py"])
             items = NewsModel.query.all()
             return render_template('news_list.html', items=items)
         except SQLAlchemyError as e:
