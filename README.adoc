@@ -98,7 +98,7 @@ JSON:
 
 == Features 
 **The Backend** contain all essential features:
-
-
-
-
+- Dynamic topic search
+- **Logging** functionality included
+- Support for both **HTML and JSON** response 
+- **Rule based** news sentiment analysis 
