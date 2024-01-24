@@ -91,8 +91,6 @@ if req.status_code == 200:
         engine = create_engine("mysql+pymysql://{user}:{pw}@{host}/{db}".format(
     host=hostname, db=database, user=username, pw=password
         ))
-
-        
         df = df.rename(columns={'Sentiment Analysis': 'sentimentAnalysis', 'Analysis Content': 'analysisContent'})
         
         df.to_sql(con=engine, name='news_analysis', if_exists='replace', index=True)
